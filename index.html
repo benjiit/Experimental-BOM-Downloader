@@ -107,11 +107,11 @@
 
                     var blob = new Blob([csv], { type: 'text/csv' });
                     var url = window.URL.createObjectURL(blob);
-                    window.URL.revokeObjectURL(url);
                     var a = document.createElement('a');
                     a.setAttribute('href', url);
                     a.setAttribute('download', 'BOM_Export.csv');
                     a.click();
+                    window.URL.revokeObjectURL(url);
                 }
             };
 
