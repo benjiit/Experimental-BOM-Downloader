@@ -40,6 +40,9 @@ require([
                         }
                     });
                 }
+                onFailure: function(error) {
+                     widget.setBody("<p style='color:red;'>Error getting service URL:" + error + "</p>");
+                }
             });
         },
 
@@ -81,6 +84,7 @@ require([
             link.setAttribute("href", url);
             link.setAttribute("download", "BOM_Export.csv");
             link.click();
+            URL.revokeObjectURL(url);
         }
     };
 
