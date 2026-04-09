@@ -89,16 +89,17 @@
                     document.getElementById('status').innerHTML = "BOM Loaded.";
                     document.getElementById('downloadBtn').style.display = "inline-block";
                 },
-                function escapeCSV(str) {
-                    if (str === null || str === undefined) str = '';
-                    if (str.includes(',') || str.includes('"') || str.includes('\n')) {
-                        return '"' + str.replace(/"/g, '""') + '"';
-                    }
-                    return str;
-                },
 
                 download: function() {
                     var csv = "Name,Revision,Quantity\n";
+
+                    escapeCSV: function(str) {
+                        if (str === null || str === undefined) str = '';
+                        if (str.includes(',') || str.includes('"') || str.includes('\n')) {
+                            return '"' + str.replace(/"/g, '""') + '"';
+                        }
+                        return str;
+                    },
                     this.data.forEach(function(row) {
                         csv += escapeCSV(row.title) + "," + escapeCSV(row.revision) + ",1\n";
                     });
