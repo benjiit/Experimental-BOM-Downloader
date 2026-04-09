@@ -39,7 +39,7 @@ require([
                             widget.setBody("<p style='color:red;'>Error fetching data: " + error + "</p>");
                         }
                     });
-                }
+                },
                 onFailure: function(error) {
                      widget.setBody("<p style='color:red;'>Error getting service URL:" + error + "</p>");
                 }
