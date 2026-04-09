@@ -81,7 +81,7 @@
                 render: function() {
                     var html = "<table><tr><th>Name</th><th>Rev</th><th>Qty</th></tr>";
                     this.data.forEach(function(item) {
-                        html += "<tr><td>" + (item.title || 'N/A') + "</td><td>" + (item.revision || '-') + "</td><td>1</td></tr>";
+                        html += "<tr><td>" + (item.title || 'N/A') + "</td><td>" + (item.revision || '-') + "</td><td>" + (item.quantity || 1) + "</td></tr>";
                     });
                     html += "</table>";
                     
@@ -98,14 +98,16 @@
                         if (str.includes(',') || str.includes('"') || str.includes('\n')) {
                             return '"' + str.replace(/"/g, '""') + '"';
                         }
+                        str = String(str);
                         return str;
                     };
                     this.data.forEach(function(row) {
-                        csv += escapeCSV(row.title) + "," + escapeCSV(row.revision) + ",1\n";
+                        csv += escapeCSV(row.title) + "," + escapeCSV(row.revision) + "," + (row.quantity || 1) + "\n";
                     });
 
                     var blob = new Blob([csv], { type: 'text/csv' });
                     var url = window.URL.createObjectURL(blob);
+                    window.URL.revokeObjectURL(url);
                     var a = document.createElement('a');
                     a.setAttribute('href', url);
                     a.setAttribute('download', 'BOM_Export.csv');
